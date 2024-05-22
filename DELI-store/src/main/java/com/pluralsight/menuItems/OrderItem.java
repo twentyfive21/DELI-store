@@ -14,25 +14,26 @@ public abstract class OrderItem {
 
     // protected members
 
-    protected int size;
+    protected String size;
     protected double price;
     protected String type;
 
     // constructor
 
-    public OrderItem(int size, double price, String type) {
+    public OrderItem(String size, double price, String type) {
         this.size = size;
         this.price = price;
         this.type = type;
     }
 
+
     // getters and setters
 
-    public int getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
