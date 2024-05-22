@@ -1,7 +1,7 @@
 import com.pluralsight.OrderDetails;
 import com.pluralsight.Sandwich;
 
-import static com.pluralsight.DisplayMenu.displayMenuOptions;
+import static com.pluralsight.showMenu.DisplayMenu.displayMenuOptions;
 
 public class Main {
     // start of the program

@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.showMenu;
 
 public class DisplayMenu {
     public static void main(String[] args) {
@@ -6,6 +6,6 @@ public class DisplayMenu {
     }
 
     public static void displayMenuOptions(){
-        System.out.println("hello from display menu");
+
     }
 }
