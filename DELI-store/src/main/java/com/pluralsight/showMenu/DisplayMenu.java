@@ -25,6 +25,8 @@ public class DisplayMenu {
         sandwich.setMeats(meats);
         List<String> toppings = List.of("lettuce", "onions");
         sandwich.setFreeToppings(toppings);
+        List<String> sauces = List.of("Ranch", "Mayo");
+        sandwich.setFreeSauces(sauces);
         System.out.println(sandwich);
 
         Chips chips = new Chips("Snack Size", 1.25, "Takis");
