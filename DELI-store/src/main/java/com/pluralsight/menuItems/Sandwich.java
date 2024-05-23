@@ -9,17 +9,26 @@ public class Sandwich extends OrderItem{
     private List<String> cheeses;
     private List<String> freeToppings;
     private List<String> freeSauces;
+    private boolean toasted;
 
     // constructor
 
-    public Sandwich(String size, double price, String type) {
+    public Sandwich(String size, double price, String type, boolean toasted) {
         super(size, price, type);
         this.meats = new ArrayList<>();
         this.cheeses = new ArrayList<>();
         this.freeToppings = new ArrayList<>();
         this.freeSauces = new ArrayList<>();
+        this.toasted = toasted;
     }
 
+    public boolean isToasted() {
+        return toasted;
+    }
+
+    public void setToasted(boolean toasted) {
+        this.toasted = toasted;
+    }
 
     public List<String> getMeats() {
         return meats;
@@ -28,6 +37,7 @@ public class Sandwich extends OrderItem{
     public void setMeats(List<String> meats) {
         this.meats = meats;
     }
+
 
     public List<String> getCheeses() {
         return cheeses;
