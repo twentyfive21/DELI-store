@@ -15,10 +15,8 @@ public class Chips extends OrderItem{
 
     @Override
     public String toString() {
-        return "Chips{" +
-                "size='" + size + '\'' +
-                ", price=" + price +
-                ", type='" + type + '\'' +
-                '}';
+        return "\nChips Details: " +
+                "\nPrice= " + price +
+                "\nType= " + type;
     }
 }

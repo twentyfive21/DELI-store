@@ -21,10 +21,9 @@ public class Drinks extends OrderItem {
 
     @Override
     public String toString() {
-        return "Drinks{" +
-                "size='" + size + '\'' +
-                ", price=" + price +
-                ", type='" + type + '\'' +
-                '}';
+        return "\nDrinks Details: " +
+                "\nsize= " + size +
+                "\nprice= $" + price +
+                "\ntype= " + type ;
     }
 }

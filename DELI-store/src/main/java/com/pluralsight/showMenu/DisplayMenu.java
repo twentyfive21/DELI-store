@@ -1,5 +1,6 @@
 package com.pluralsight.showMenu;
 import com.pluralsight.displayMessages.DisplayMessage;
+import com.pluralsight.fileManager.Receipt;
 import com.pluralsight.menuItems.Chips;
 import com.pluralsight.menuItems.Drinks;
 import com.pluralsight.menuItems.OrderItem;
@@ -67,7 +68,7 @@ public class DisplayMenu {
         allSandwiches.clear();
         allChips.clear();
         allDrinks.clear();
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~ Order canceled ~~~~~~~~~~~~~~~~~~~~~");
+        aSauce = 0;
     }
 
     // **************************** ADD SANDWICH ORDER SCREEN ****************************
@@ -251,8 +252,7 @@ public class DisplayMenu {
             for (Sandwich item : allSandwiches) {
                 DisplayMessage.displaySandwichesHeadline();
                 String isToasted = item.isToasted() ? "toasted" : "not toasted";
-                System.out.printf("| Bread type: %s and is %s", item.getType(), isToasted);
-                System.out.printf("\n| Bread size: %s\" ", item.getSize());
+                System.out.printf("| Bread type: %s %s' & is %s", item.getType(), item.getSize(), isToasted);
                 System.out.printf("\n| Bread price: $%.2f", item.getPrice());
                 System.out.println("\n| Meat Toppings :");
                 item.getMeats().forEach(meat -> System.out.println("  - " + meat));
@@ -262,7 +262,9 @@ public class DisplayMenu {
                 item.getFreeToppings().forEach(regTopping -> System.out.println("  - " + regTopping));
                 System.out.println("| Sauces :");
                 item.getFreeSauces().forEach(sauce -> System.out.println("  - " + sauce));
-                System.out.printf("| Au Jus sauce : x %d", aSauce);
+                if(aSauce > 0 ){
+                    System.out.printf("| Au Jus sauce : x %d", aSauce);
+                }
                 total = item.getTotal();
             }
 
@@ -287,19 +289,21 @@ public class DisplayMenu {
             // display cart checkout options or say there are no items
             if (allDrinks.isEmpty() && allChips.isEmpty() && allSandwiches.isEmpty()) {
                 DisplayMessage.noItemsInCart();
+                return;
             } else {
                 System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.printf("|  💰 Order Total: $%.2f\n", total);
                 DisplayMessage.displayCheckout();
             }
-
-            System.out.println();
             String choice = scan.nextLine();
             switch (choice){
                 case "0" : cancelOrder();
+                    System.out.println("\n~~~~~~~~~~~~~~~~~~~~ Order canceled ~~~~~~~~~~~~~~~~~~~~~");
                     return;
-                case "1": System.out.println("Thank you for your payment! Here is your order");
-                // TODO call some method to write to csv
+                case "1": Receipt.saveOrderToFile(total,allSandwiches,allDrinks,allChips);
+                    System.out.println("\n 🥳 Thank you for your payment! Here is your order 🥳");
+                    // clear old order
+                    cancelOrder();
                     return;
                 default: System.out.println("\n**** Error please pick 1 or 2 ****");
                     break;

@@ -67,7 +67,6 @@ public class Sandwich extends OrderItem{
     // abstract method
     public double getTotal(){
     double total = super.price;
-        System.out.println(total + "bread price ");
 
         if(super.getSize().equals("4")){
 
@@ -88,7 +87,6 @@ public class Sandwich extends OrderItem{
             }
 
         }
-        System.out.println(total + "meat");
 
         if(super.getSize().equals("4")){
 
@@ -110,23 +108,18 @@ public class Sandwich extends OrderItem{
 
         }
 
-        System.out.println(total + "cheese");
-
-        System.out.println("im in sandwich");
         return total;
     };
 
 
     @Override
     public String toString() {
-        return "Sandwich{" +
-                "size='" + size + '\'' +
-                ", price=" + price +
-                ", type='" + type + '\'' +
-                ", freeSauces=" + freeSauces +
-                ", freeToppings=" + freeToppings +
-                ", meats=" + meats +
-                ", cheeses=" + cheeses +
-                '}';
+        return "\nSandwich size= " + size +
+                "\nPrice= " + price +
+                "\nType= " + type  +
+                "\nFreeSauces = " + freeSauces +
+                "\nFree Toppings= " + freeToppings +
+                "\nMeats= " + meats +
+                "\nCheeses= " + cheeses;
     }
 }
