@@ -70,26 +70,19 @@ public class DisplayMenu {
     // **************************** ADD SANDWICH ORDER SCREEN ****************************
 
     public static void addSandwich() {
-        String[] breadOptions = UtilMethods.passArray("bread type");
-        String[] breadSizeOptions = UtilMethods.passArray("bread size");
-        String[] cheeseOptions = UtilMethods.passArray("cheese");
-        String[] meatOptions = UtilMethods.passArray("meat");
-        String[] freeOptions = UtilMethods.passArray("free toppings");
-        String[] freeSauceOptions = UtilMethods.passArray("sauces");
-
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("|       🥖 You have selected to add a Sandwich! 🥖      |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         // bread info
-        String breadChoice = getSandwichPrompts("bread:", breadOptions);
-        String breadSize = getSandwichPrompts("sandwich size:", breadSizeOptions);
+        String breadChoice = getSandwichPrompts("bread:", UtilMethods.passArray("bread type"));
+        String breadSize = getSandwichPrompts("sandwich size:", UtilMethods.passArray("bread size"));
         double breadSizePrice = getBreadPrice(breadSize);
 
         // get all toppings
-        List<String> meats = getToppings("meat toppings:", meatOptions);
-        List<String> cheeseChoice = getToppings("cheese toppings:", cheeseOptions);
-        List<String> freeToppings = getToppings("Regular toppings:", freeOptions);
-        List<String> freeSauces = getToppings("sauces:", freeSauceOptions);
+        List<String> meats = getToppings("meat toppings:", UtilMethods.passArray("meat"));
+        List<String> cheeseChoice = getToppings("cheese toppings:", UtilMethods.passArray("cheese"));
+        List<String> freeToppings = getToppings("Regular toppings:", UtilMethods.passArray("free toppings"));
+        List<String> freeSauces = getToppings("sauces:", UtilMethods.passArray("sauces"));
         boolean toasted = getToastedOption();
         Sandwich sandwich = new Sandwich(breadSize, breadSizePrice, breadChoice, toasted);
         // ask for au jus sauce
