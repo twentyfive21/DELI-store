@@ -9,8 +9,8 @@ public class Chips extends OrderItem{
 
 
     @Override
-    public void getTotal() {
-
+    public double getTotal() {
+        return 1.50;
     }
 
     @Override

@@ -54,7 +54,7 @@ public abstract class OrderItem {
     }
 
     // abstract method
-    public abstract void getTotal();
+    public abstract double getTotal();
 
     @Override
     public String toString() {

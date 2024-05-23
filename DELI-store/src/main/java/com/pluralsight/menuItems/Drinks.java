@@ -7,8 +7,16 @@ public class Drinks extends OrderItem {
     }
 
     @Override
-    public void getTotal() {
-
+    public double getTotal() {
+        double total = 0.00;
+        if(super.size.equals("Small")){
+            total += 2.00;
+        } else if(super.size.equals("Medium")){
+            total += 2.50;
+        } else {
+            total += 3.00;
+        }
+        return total;
     }
 
     @Override

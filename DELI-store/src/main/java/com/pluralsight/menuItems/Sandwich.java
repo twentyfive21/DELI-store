@@ -65,8 +65,55 @@ public class Sandwich extends OrderItem{
 
     @Override
     // abstract method
-    public void getTotal(){
-        System.out.println("hippo");
+    public double getTotal(){
+    double total = super.price;
+        System.out.println(total + "bread price ");
+
+        if(super.getSize().equals("4")){
+
+            for(int i = 0; i < meats.size(); i++){
+                total += (i == 0) ? 1.00 : .50;
+            }
+
+        } else if (super.getSize().equals("8")){
+
+            for(int i = 0; i < meats.size(); i++){
+                total += (i == 0) ? 2.00 : 1.00;
+            }
+
+        }else {
+
+            for(int i = 0; i < meats.size(); i++){
+                total += (i == 0) ? 3.00 : 1.50;
+            }
+
+        }
+        System.out.println(total + "meat");
+
+        if(super.getSize().equals("4")){
+
+            for(int i = 0; i < cheeses.size(); i++){
+                total += (i == 0) ? 0.75 : 0.30;
+            }
+
+        } else if (super.getSize().equals("8")){
+
+            for(int i = 0; i < cheeses.size(); i++){
+                total += (i == 0) ? 1.50 : .60;
+            }
+
+        }else {
+
+            for(int i = 0; i < cheeses.size(); i++){
+                total += (i == 0) ? 2.25 : .90;
+            }
+
+        }
+
+        System.out.println(total + "cheese");
+
+        System.out.println("im in sandwich");
+        return total;
     };
 
 

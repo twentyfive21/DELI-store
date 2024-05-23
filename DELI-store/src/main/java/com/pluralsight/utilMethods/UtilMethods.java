@@ -55,6 +55,10 @@ public class UtilMethods {
             selectedArray = new String[]{"Water", "Coke", "Apple juice", "Sprite", "Original Milk tea boba"};
         }
 
+        if(type.equals("drink size")){
+            selectedArray = new String[]{"Small", "Medium", "Large"};
+        }
+
         return selectedArray;
 
     }

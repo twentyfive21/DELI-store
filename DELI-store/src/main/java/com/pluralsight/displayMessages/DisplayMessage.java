@@ -46,6 +46,7 @@ public class DisplayMessage {
         System.out.println("|  (3) Doritos Nacho Cheese chips 🧀                     |");
         System.out.println("|  (4) Ruffles Cheddar Chips 🧀                          |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.print("|| Please make a selection: ");
     }
 
     public static void displayDrinks(){
@@ -58,13 +59,18 @@ public class DisplayMessage {
         System.out.println("|  (3) Sprite 🥤                                         |");
         System.out.println("|  (4) Original Milk tea boba 🧋                         |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.print("|| Please make a selection: ");
     }
 
-    public static void displayCheckout(){
+    public static void displayCartHeadline(){
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("|  (0) Cancel my order                                   |");
-        System.out.println("|  (1) Confirm and checkout                              |");
+        System.out.println("|🌸🐷 Currently all the items you ordered are below 🐽🌸 |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+    public static void displayCheckout(){
+        System.out.println("|  (0) Cancel my order");
+        System.out.println("|  (1) Confirm and checkout");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.print("|| Please make a selection: ");
     }
 
@@ -85,4 +91,12 @@ public class DisplayMessage {
         System.out.println("|                   🥔  Chips  🥔                      |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
+
+    public static void displaySandwichesHeadline(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|                🥪 Sandwich Details  🥪               |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+
 }
