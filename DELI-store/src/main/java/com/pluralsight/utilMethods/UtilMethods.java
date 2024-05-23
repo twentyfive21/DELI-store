@@ -3,17 +3,19 @@ package com.pluralsight.utilMethods;
 public class UtilMethods {
 
     // **************************** PRINT OUT MENU ARRAY LIST ****************************
+    // only for bread type and size
     public static void printOutMenu(String promptMessage, String[] options){
         System.out.println("Choose your "+ promptMessage);
         // display the items available
         for (int i = 0; i < options.length; i++) {
-            System.out.printf("|  (%d) %s\n", i, options[i]);
+            if(promptMessage.equals("sandwich size:")){
+                System.out.printf("|  (%d) %s\"\n", i, options[i]);
+            } else {
+                System.out.printf("|  (%d) %s\n", i, options[i]);
+            }
         }
-        // let user pick their selection
-        System.out.print("|| Selection: ");
+        System.out.print("|| Please make a selection: ");
     }
-
-
 
     // **************************** PASS ARRAY BACK ****************************
 
