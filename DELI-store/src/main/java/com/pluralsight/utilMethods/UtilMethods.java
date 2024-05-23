@@ -45,6 +45,14 @@ public class UtilMethods {
             selectedArray = new String[]{"Mayo", "Mustard", "Ketchup", "Ranch", "Thousand Islands", "Vinaigrette"};
         }
 
+        if(type.equals("chips")) {
+            selectedArray = new String[]{"Sun chips", "Lays chips", "Lays Barbeque chips", "Doritos Nacho Cheese chips", "Ruffles Cheddar Chips"};
+        }
+
+        if(type.equals("drinks")) {
+            selectedArray = new String[]{"Water", "Coke", "Apple juice", "Sprite", "Original Milk tea boba"};
+        }
+
         return selectedArray;
 
     }

@@ -68,8 +68,8 @@ public class DisplayMenu {
         System.out.println("|       🥖 You have selected to add a Sandwich! 🥖      |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         // bread info
-        String breadChoice = getSandwichPrompts("bread:", UtilMethods.passArray("bread type"));
-        String breadSize = getSandwichPrompts("sandwich size:", UtilMethods.passArray("bread size"));
+        String breadChoice = getSingleItem("bread:", UtilMethods.passArray("bread type"));
+        String breadSize = getSingleItem("sandwich size:", UtilMethods.passArray("bread size"));
         double breadSizePrice = getBreadPrice(breadSize);
         // create sandwich object
         Sandwich sandwich = new Sandwich(breadSize, breadSizePrice, breadChoice, getToastedOption());
@@ -85,9 +85,12 @@ public class DisplayMenu {
 
     // **************************** GET SANDWICH ORDER SCREEN ****************************
 
-    public static String getSandwichPrompts(String promptMessage, String[] options) {
+    public static String getSingleItem(String promptMessage, String[] options) {
         while (true) {
-            UtilMethods.printOutMenu(promptMessage, options);
+    // do not print this for chips or drinks since it is already printed only do for bread type & size
+            if(promptMessage.equals("bread:") || promptMessage.equals("sandwich size:")){
+                UtilMethods.printOutMenu(promptMessage, options);
+            }
             String input = scan.nextLine().trim();
             // if int matches array return item
             try {
@@ -197,13 +200,24 @@ public class DisplayMenu {
     // **************************** ADD DRINKS ORDER SCREEN ****************************
 
     public static void addDrink() {
+        // super(size, price, type);
+        String menuItem = "drinks";
         DisplayMessage.displayDrinks();
+        String chosenDrink = getSingleItem(menuItem, UtilMethods.passArray(menuItem));
+        Drinks drink = new Drinks("r", 1.50, chosenDrink);
+        allDrinks.add(drink);
+        System.out.println(allDrinks);
     }
 
     // **************************** ADD CHIPS ORDER SCREEN ****************************
 
     public static void addChips() {
+        String menuItem = "chips";
         DisplayMessage.displayChips();
+        String chosenChips = getSingleItem(menuItem, UtilMethods.passArray(menuItem));
+        Chips chip = new Chips("r", 1.50, chosenChips);
+        allChips.add(chip);
+        System.out.println(allChips);
     }
 
     // **************************** DISPLAY CHECKOUT SCREEN ****************************

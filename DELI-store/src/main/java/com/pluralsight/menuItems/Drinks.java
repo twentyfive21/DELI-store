@@ -2,7 +2,6 @@ package com.pluralsight.menuItems;
 
 public class Drinks extends OrderItem {
 
-
     public Drinks(String size, double price, String type) {
         super(size, price, type);
     }
