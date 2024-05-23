@@ -30,11 +30,36 @@ public class DisplayMessage {
     public static void exitProgram(){
         String border = "=========================================================";
         String message = "||   🍅Thank you for visiting! Have a nice day! :) 🧀  ||";
-
         System.out.println();
         System.out.println(border);
         System.out.println(message);
         System.out.println(border);
+    }
+
+    public static void displayChips(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|          🥔 You have selected to add Chips 🥔          |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|  (0) Sun chips ☀️                                      |");
+        System.out.println("|  (1) Lays chips 🌼                                     |");
+        System.out.println("|  (2) Lays Barbeque chips 🍖                            |");
+        System.out.println("|  (3) Doritos Nacho Cheese chips 🧀                     |");
+        System.out.println("|  (4) Ruffles Cheddar Chips 🧀                          |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.print("|| Please make a selection: ");
+    }
+
+    public static void displayDrinks(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|         🥤 You have selected to add a drink  🧃        |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|  (0) Water 💧                                          |");
+        System.out.println("|  (1) Coke 🥤                                           |");
+        System.out.println("|  (2) Apple Juice 🧃                                    |");
+        System.out.println("|  (3) Sprite 🥤                                         |");
+        System.out.println("|  (4) Original Milk tea boba 🧋                         |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.print("|| Please make a selection: ");
     }
 
 }

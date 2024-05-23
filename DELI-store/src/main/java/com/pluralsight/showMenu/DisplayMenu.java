@@ -1,5 +1,7 @@
 package com.pluralsight.showMenu;
 import com.pluralsight.displayMessages.DisplayMessage;
+import com.pluralsight.menuItems.Chips;
+import com.pluralsight.menuItems.Drinks;
 import com.pluralsight.menuItems.Sandwich;
 import com.pluralsight.utilMethods.UtilMethods;
 
@@ -8,28 +10,26 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DisplayMenu {
-    // keep count of sauce if user adds to order
-    public static int aSauce;
     // global scanner
     static Scanner scan = new Scanner(System.in);
+    // keep count of sauce if user adds to order
+    static int aSauce;
+    static List<Chips> allChips = new ArrayList<>();
+    static List<Drinks> allDrinks = new ArrayList<>();
 
     // **************************** DISPLAY THE MAIN MENU ************************************
 
     public static void displayMenuOptions() {
         while (true) {
-            // display beginning message
+            // display beginning message & get users choice
             DisplayMessage.displayStartOfProgram();
-            // users choice
             String choice = scan.nextLine().trim();
             switch (choice) {
-                case "1":
-                    displayOrderScreen(); // call the second order screen
+                case "1": displayOrderScreen(); // call the second order screen
                     break;
-                case "2":
-                    exitProgram(); // exit the program
+                case "2": exitProgram(); // exit the program
                     return;
-                default:
-                    System.out.println("\n❗️️❗️     Error please pick 1 or 2     ❗️❗️"); // handle incorrect input
+                default: System.out.println("\n❗️️❗️     Error please pick 1 or 2     ❗️❗️");
                     break;
             }
         }
@@ -45,23 +45,17 @@ public class DisplayMenu {
             // get main menu input
             String choice = scan.nextLine().trim();
             switch (choice) {
-                case "1":
-                    addSandwich();
+                case "1": addSandwich();
                     break;
-                case "2":
-                    addDrink();
+                case "2": addDrink();
                     break;
-                case "3":
-                    addChips();
+                case "3": addChips();
                     break;
-                case "4":
-                    displayCheckout();
+                case "4": displayCheckout();
                     break;
-                case "0":
-                    System.out.println("\n~~~~~~~~~~~~~~~~~~~~ Order canceled ~~~~~~~~~~~~~~~~~~~~~");
+                case "0": System.out.println("\n~~~~~~~~~~~~~~~~~~~~ Order canceled ~~~~~~~~~~~~~~~~~~~~~");
                     return;
-                default:
-                    System.out.println("\n️️❗️️️❗️     Error please pick 0 - 4 ️️    ❗️️️❗️"); // handle incorrect input
+                default: System.out.println("\n️️❗️️️❗️     Error please pick 0 - 4 ️️    ❗️️️❗️");
                     break;
             }
         }
@@ -77,24 +71,21 @@ public class DisplayMenu {
         String breadChoice = getSandwichPrompts("bread:", UtilMethods.passArray("bread type"));
         String breadSize = getSandwichPrompts("sandwich size:", UtilMethods.passArray("bread size"));
         double breadSizePrice = getBreadPrice(breadSize);
-
-        // get all toppings
-        List<String> meats = getToppings("meat toppings:", UtilMethods.passArray("meat"));
-        List<String> cheeseChoice = getToppings("cheese toppings:", UtilMethods.passArray("cheese"));
-        List<String> freeToppings = getToppings("Regular toppings:", UtilMethods.passArray("free toppings"));
-        List<String> freeSauces = getToppings("sauces:", UtilMethods.passArray("sauces"));
-        boolean toasted = getToastedOption();
-        Sandwich sandwich = new Sandwich(breadSize, breadSizePrice, breadChoice, toasted);
+        // create sandwich object
+        Sandwich sandwich = new Sandwich(breadSize, breadSizePrice, breadChoice, getToastedOption());
+        // get all toppings & set them in the object
+        sandwich.setMeats(getToppings("meat toppings:", UtilMethods.passArray("meat")));
+        sandwich.setCheeses(getToppings("cheese toppings:", UtilMethods.passArray("cheese")));
+        sandwich.setFreeToppings(getToppings("Regular toppings:", UtilMethods.passArray("free toppings")));
+        sandwich.setFreeSauces(getToppings("sauces:", UtilMethods.passArray("sauces")));
         // ask for au jus sauce
         promptASauce();
         System.out.println(sandwich);
     }
 
-
     // **************************** GET SANDWICH ORDER SCREEN ****************************
 
     public static String getSandwichPrompts(String promptMessage, String[] options) {
-
         while (true) {
             UtilMethods.printOutMenu(promptMessage, options);
             String input = scan.nextLine().trim();
@@ -161,12 +152,9 @@ public class DisplayMenu {
             System.out.print("Choice: ");
             String choice = scan.nextLine().trim();
             switch (choice) {
-                case "y":
-                    return true;
-                case "n":
-                    return false;
-                default:
-                    System.out.println("Invalid choice for toasted");
+                case "y": return true;
+                case "n": return false;
+                default: System.out.println("Invalid choice for toasted");
                     break;
             }
         }
@@ -186,36 +174,36 @@ public class DisplayMenu {
         return sizePrice;
     }
 
-
 // **************************** A SAUCE ORDER SCREEN ****************************
 
     public static void promptASauce() {
-        System.out.println("Would you like au jus sauce? y(yes) or n(no)");
-        System.out.print("Selection: ");
-        String choice = scan.nextLine().trim();
-        switch (choice) {
-            case "y":
-                ++aSauce;
-                System.out.println("\n ~~~~ You have selected au jus sauce to be added ~~~~");
-                break;
-            case "n":
-                System.out.println("\n ~~~~ You have selected no au jus sauce ~~~~");
-                break;
-            default:
-                System.out.println("\n ~~~~ please pick y or n ~~~~");
+        while (true){
+            System.out.println("Would you like au jus sauce? y(yes) or n(no)");
+            System.out.print("Selection: ");
+            String choice = scan.nextLine().trim();
+            switch (choice) {
+                case "y": ++aSauce;
+                    System.out.println("\n ~~~~ You have selected au jus sauce to be added ~~~~");
+                    return;
+                case "n": System.out.println("\n ~~~~ You have selected no au jus sauce ~~~~");
+                    return;
+                default: System.out.println("\n ~~~~ please pick y or n ~~~~");
+                    break;
+            }
         }
+
     }
 
     // **************************** ADD DRINKS ORDER SCREEN ****************************
 
     public static void addDrink() {
-        System.out.println("add drink method");
+        DisplayMessage.displayDrinks();
     }
 
     // **************************** ADD CHIPS ORDER SCREEN ****************************
 
     public static void addChips() {
-        System.out.println("add chips method");
+        DisplayMessage.displayChips();
     }
 
     // **************************** DISPLAY CHECKOUT SCREEN ****************************
