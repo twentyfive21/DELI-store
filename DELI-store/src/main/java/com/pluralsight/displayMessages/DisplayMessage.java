@@ -46,7 +46,6 @@ public class DisplayMessage {
         System.out.println("|  (3) Doritos Nacho Cheese chips 🧀                     |");
         System.out.println("|  (4) Ruffles Cheddar Chips 🧀                          |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.print("|| Please make a selection: ");
     }
 
     public static void displayDrinks(){
@@ -59,7 +58,31 @@ public class DisplayMessage {
         System.out.println("|  (3) Sprite 🥤                                         |");
         System.out.println("|  (4) Original Milk tea boba 🧋                         |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public static void displayCheckout(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|  (0) Cancel my order                                   |");
+        System.out.println("|  (1) Confirm and checkout                              |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.print("|| Please make a selection: ");
     }
 
+    public static void noItemsInCart(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|            🥹 No items ordered currently! 🛒          |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public static void drinkCheckoutPrompt(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|                    🥤 Drinks 🧋                      |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public static void chipsCheckoutPrompt(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|                   🥔  Chips  🥔                      |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
 }
