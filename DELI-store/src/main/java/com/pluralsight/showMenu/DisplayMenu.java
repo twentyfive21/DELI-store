@@ -2,6 +2,7 @@ package com.pluralsight.showMenu;
 import com.pluralsight.displayMessages.DisplayMessage;
 import com.pluralsight.menuItems.Chips;
 import com.pluralsight.menuItems.Drinks;
+import com.pluralsight.menuItems.OrderItem;
 import com.pluralsight.menuItems.Sandwich;
 import com.pluralsight.utilMethods.UtilMethods;
 
@@ -14,12 +15,13 @@ public class DisplayMenu {
     static Scanner scan = new Scanner(System.in);
     // keep count of sauce if user adds to order
     static int aSauce;
+    static List<Sandwich> allSandwiches = new ArrayList<>();
     static List<Chips> allChips = new ArrayList<>();
     static List<Drinks> allDrinks = new ArrayList<>();
 
     // **************************** DISPLAY THE MAIN MENU ************************************
 
-    public static void displayMenuOptions() {
+    public static void display() {
         while (true) {
             // display beginning message & get users choice
             DisplayMessage.displayStartOfProgram();
@@ -80,7 +82,7 @@ public class DisplayMenu {
         sandwich.setFreeSauces(getToppings("sauces:", UtilMethods.passArray("sauces")));
         // ask for au jus sauce
         promptASauce();
-        System.out.println(sandwich);
+        allSandwiches.add(sandwich);
     }
 
     // **************************** GET SANDWICH ORDER SCREEN ****************************
@@ -90,6 +92,10 @@ public class DisplayMenu {
     // do not print this for chips or drinks since it is already printed only do for bread type & size
             if(promptMessage.equals("bread:") || promptMessage.equals("sandwich size:")){
                 UtilMethods.printOutMenu(promptMessage, options);
+            } else if(promptMessage.equals("chips")){
+                DisplayMessage.displayChips();
+            } else {
+                DisplayMessage.displayDrinks();
             }
             String input = scan.nextLine().trim();
             // if int matches array return item
@@ -118,6 +124,7 @@ public class DisplayMenu {
         boolean moreToppings = true;
 
         while (moreToppings) {
+            System.out.println();
             UtilMethods.printOutMenu(promptMessage, options);
             String input = scan.nextLine().trim();
             // if int matches array return item
@@ -127,12 +134,12 @@ public class DisplayMenu {
                 if (choice >= 0 && choice < options.length) {
                     // return string of selected choice
                     selectedToppings.add(options[choice]);
-                    System.out.println("Added " + options[choice] + " to toppings.");
+                    System.out.println("\n**** Added " + options[choice] + " to toppings. ****");
                     // Ask the user if they want to add more toppings
                     System.out.printf("\nWould you like to add more %s? (y) yes or (n) no ", promptMessage);
-                    System.out.print("|| Selection: ");
+                    System.out.print("\n|| Selection: ");
                     String addMore = scan.nextLine().toLowerCase().trim();
-                    if (addMore.equals("n")) {
+                    if (addMore.equalsIgnoreCase("n") || addMore.equalsIgnoreCase("no")) {
                         moreToppings = false;
                     }
                 } else {
@@ -202,28 +209,70 @@ public class DisplayMenu {
     public static void addDrink() {
         // super(size, price, type);
         String menuItem = "drinks";
-        DisplayMessage.displayDrinks();
         String chosenDrink = getSingleItem(menuItem, UtilMethods.passArray(menuItem));
         Drinks drink = new Drinks("r", 1.50, chosenDrink);
         allDrinks.add(drink);
-        System.out.println(allDrinks);
     }
 
     // **************************** ADD CHIPS ORDER SCREEN ****************************
 
     public static void addChips() {
         String menuItem = "chips";
-        DisplayMessage.displayChips();
         String chosenChips = getSingleItem(menuItem, UtilMethods.passArray(menuItem));
         Chips chip = new Chips("r", 1.50, chosenChips);
         allChips.add(chip);
-        System.out.println(allChips);
     }
 
     // **************************** DISPLAY CHECKOUT SCREEN ****************************
 
     public static void displayCheckout() {
-        System.out.println("display checkout method");
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|🌸🐷 Currently all the items you ordered are below 🐽🌸 |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        // loop this
+        for (Sandwich item : allSandwiches){
+            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("|                🥪 Sandwich Details  🥪               |");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            String isToasted = item.isToasted() ? "toasted" : "not toasted";
+            System.out.printf("| Bread type: %s and is %s", item.getType(), isToasted);
+            System.out.printf("\n| Bread size: %s\" ", item.getSize());
+            System.out.printf("\n| Bread price: $%.2f", item.getPrice());
+            System.out.println("\n| Meat Toppings :");
+            item.getMeats().forEach(meat -> System.out.println("  - " + meat));
+            System.out.println("| Cheese Toppings :");
+            item.getCheeses().forEach(cheese -> System.out.println("  - " + cheese));
+            System.out.println("| Regular Toppings :");
+            item.getFreeToppings().forEach(regTopping -> System.out.println("  - " + regTopping));
+            System.out.println("| Sauces :");
+            item.getFreeSauces().forEach(sauce -> System.out.println("  - " + sauce));
+            System.out.printf("| Au Jus sauce : x %d",aSauce);
+        }
+
+        // if there are chips print them
+        if(!allChips.isEmpty()){
+            DisplayMessage.chipsCheckoutPrompt();
+            for(Chips chip : allChips){
+                System.out.printf("- %s $%.2f\n", chip.getType(),chip.getPrice());
+            }
+        }
+
+        // if there are drinks print them
+        if(!allDrinks.isEmpty()){
+            DisplayMessage.drinkCheckoutPrompt();
+            for(Drinks drink : allDrinks){
+                System.out.printf("- %s $%.2f\n", drink.getType(),drink.getPrice());
+            }
+        }
+
+        // display cart checkout options or say there are no items
+        if (allDrinks.isEmpty() && allChips.isEmpty() && allSandwiches.isEmpty()){
+            DisplayMessage.noItemsInCart();
+        } else {
+            DisplayMessage.displayCheckout();
+        }
+
     }
 
     public static void exitProgram() {
