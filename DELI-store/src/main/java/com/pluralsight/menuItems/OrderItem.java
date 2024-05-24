@@ -58,10 +58,9 @@ public abstract class OrderItem {
 
     @Override
     public String toString() {
-        return "OrderItem{" +
+        return "OrderItem" +
                 "size=" + size +
-                ", price=" + price +
-                ", type='" + type + '\'' +
-                '}';
+                ", price= " + price +
+                ", type='" + type;
     }
 }
