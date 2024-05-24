@@ -1,13 +1,11 @@
 package com.pluralsight.showMenu;
 import com.pluralsight.displayMessages.DisplayMessage;
 import com.pluralsight.fileManager.Receipt;
-import com.pluralsight.menuItems.Chips;
-import com.pluralsight.menuItems.Drinks;
-import com.pluralsight.menuItems.OrderItem;
-import com.pluralsight.menuItems.Sandwich;
+import com.pluralsight.menuItems.*;
 import com.pluralsight.utilMethods.UtilMethods;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,10 +13,12 @@ public class DisplayMenu {
     // global scanner
     static Scanner scan = new Scanner(System.in);
     // keep count of sauce if user adds to order
-    static int aSauce;
+    static String signatureChoice = "blt";
     static List<Sandwich> allSandwiches = new ArrayList<>();
     static List<Chips> allChips = new ArrayList<>();
     static List<Drinks> allDrinks = new ArrayList<>();
+    static Sandwich bltSandwich = new Sandwich("8", 7.00, "White",true,0);
+    static Sandwich phillySandwich = new Sandwich("8",7.00,"White",true,0);
 
     // **************************** DISPLAY THE MAIN MENU ************************************
 
@@ -39,6 +39,28 @@ public class DisplayMenu {
 
     }
 
+    public static void loadSignatureSandwiches(){
+        List<String> bltMeats = new ArrayList<>(List.of("Bacon"));
+        List<String> bltCheeses = new ArrayList<>(List.of("Cheddar"));
+        List<String> bltRegToppings = new ArrayList<>(Arrays.asList("Lettuce", "Tomato"));
+        List<String> bltSauces = new ArrayList<>(List.of("Ranch"));
+        bltSandwich.setMeats(bltMeats);
+        bltSandwich.setCheeses(bltCheeses);
+        bltSandwich.setFreeToppings(bltRegToppings);
+        bltSandwich.setFreeSauces(bltSauces);
+
+
+        List<String> philMeats = new ArrayList<>(List.of("Steak"));
+        List<String> philCheeses = new ArrayList<>(List.of("American Cheese"));
+        List<String> philRegToppings = new ArrayList<>(List.of("Peppers"));
+        List<String> philSauces = new ArrayList<>(List.of("Mayo"));
+        phillySandwich.setMeats(philMeats);
+        phillySandwich.setCheeses(philCheeses);
+        phillySandwich.setFreeToppings(philRegToppings);
+        phillySandwich.setFreeSauces(philSauces);
+
+    }
+
     // **************************** DISPLAY THE ORDER SCREEN ****************************
 
     public static void displayOrderScreen() {
@@ -50,11 +72,13 @@ public class DisplayMenu {
             switch (choice) {
                 case "1": addSandwich();
                     break;
-                case "2": addDrink();
+                case "2": addSignatureSandwich();
                     break;
-                case "3": addChips();
+                case "3": addDrink();
                     break;
-                case "4": displayCheckout();
+                case "4": addChips();
+                    break;
+                case "5": displayCheckout();
                     break;
                 case "0": cancelOrder();
                     return;
@@ -68,7 +92,141 @@ public class DisplayMenu {
         allSandwiches.clear();
         allChips.clear();
         allDrinks.clear();
-        aSauce = 0;
+    }
+    // **************************** ADD SIGNATURE SANDWICH ORDER SCREEN ****************************
+
+    public static void addSignatureSandwich(){
+        while (true){
+            DisplayMessage.displaySignatureOptions();
+            String choice = scan.nextLine().trim();
+            switch (choice){
+                case "1": modifySignatureSandwich(bltSandwich);
+                    signatureChoice = "blt";
+                    break;
+                case "2":modifySignatureSandwich(phillySandwich);
+                    signatureChoice = "philly";
+                    break;
+                case "3": return;
+                default: System.out.println("Invalid signature choice please select 1-3");
+                    break;
+            }
+        }
+    }
+
+    // **************************** MODIFY SIGNATURE SANDWICH ORDER SCREEN ****************************
+    public static void modifySignatureSandwich(Sandwich sandwich) {
+        while (true) {
+            DisplayMessage.displaySandwichesHeadline();
+            String toasted = sandwich.isToasted() ? "is toasted" : "not toasted";
+            System.out.printf("Bread type: %s and %s\n", sandwich.getType(), toasted);
+            System.out.printf("Bread size: %s' \n", sandwich.getSize());
+            System.out.println("Meat Toppings: ");
+            for (String meatTopping : sandwich.getMeats()){
+                System.out.println("  - " + meatTopping);
+            }
+            System.out.println("Cheese Toppings: ");
+            for (String cheeseTopping : sandwich.getCheeses()){
+                System.out.println("  - " + cheeseTopping);
+            }
+            System.out.println("Regular Toppings: ");
+            for (String freeTopping : sandwich.getFreeToppings()){
+                System.out.println("  - " + freeTopping);
+            }
+            System.out.println("Sauces: ");
+            for (String sauces : sandwich.getFreeSauces()){
+                System.out.println("  - " + sauces);
+            }
+            Sandwich modifiedsandwich;
+            if(signatureChoice.equals("blt")){
+                modifiedsandwich = bltSandwich;
+            } else {
+                modifiedsandwich = phillySandwich;
+            }
+            DisplayMessage.displaySignatureModifyChoice();
+            String choice = scan.nextLine().trim();
+            switch (choice) {
+                case "1": // Confirm order without changes
+                    allSandwiches.add(sandwich);
+                    return;
+                case "2": // Change bread type
+                    changeBreadType(sandwich);
+                    break;
+                case "3": // Add toppings
+                    addToppings(sandwich);
+                    break;
+                case "4": // Delete toppings
+                    deleteToppings(sandwich);
+                    break;
+                case "5": allSandwiches.add(modifiedsandwich);
+                    return;
+                case "6": // Exit modification
+                    return;
+                default:
+                    System.out.println("Invalid choice, please select 1-5");
+                    break;
+            }
+        }
+    }
+
+    public static void changeBreadType(Sandwich sandwich) {
+        String newBreadType = getSingleItem("bread:", UtilMethods.passArray("bread type"));
+        sandwich.setType(newBreadType);
+        System.out.println("Bread type changed to " + newBreadType);
+
+    }
+
+    public static void addToppings(Sandwich sandwich) {
+        System.out.println("What type of toppings would you like to add? or select 4 to exit");
+        String[] toppingTypes = {"Meat", "Cheese", "Free Toppings", "Sauces", "Exit"};
+        UtilMethods.printOutMenu("Topping types:", toppingTypes);
+        String choice = scan.nextLine().trim();
+        switch (choice) {
+            case "0":
+                sandwich.addMeats(getToppings("meat toppings:", UtilMethods.passArray("meat")));
+                break;
+            case "1":
+                sandwich.addCheeses(getToppings("cheese toppings:", UtilMethods.passArray("cheese")));
+                break;
+            case "2":
+                sandwich.addFreeToppings(getToppings("regular toppings:", UtilMethods.passArray("free toppings")));
+                break;
+            case "3":
+                sandwich.addFreeSauces(getToppings("sauces:", UtilMethods.passArray("sauces")));
+                break;
+            case "4": return;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
+    }
+
+    public static void deleteToppings(Sandwich sandwich) {
+    //  .toArray(new String[0]): This part converts the list of meat toppings to an array of strings.
+    //    - toArray() is a method that converts a list to an array.
+    //    - new String[0] creates a new empty array of strings.
+    //    - This method call ensures that the toArray() method creates a new array of the correct type to hold the elements.
+        System.out.println("What type of toppings would you like to delete? or select 4 to exit");
+        String[] toppingTypes = {"Meat", "Cheese", "Free Toppings", "Sauces", "Exit"};
+        UtilMethods.printOutMenu("Topping types:", toppingTypes);
+        String choice = scan.nextLine().trim();
+        switch (choice) {
+            case "0":
+                sandwich.removeMeats(getToppings("meat toppings to remove:", sandwich.getMeats().toArray(new String[0])));
+                break;
+            case "1":
+                sandwich.removeCheeses(getToppings("cheese toppings to remove:", sandwich.getCheeses().toArray(new String[0])));
+                break;
+            case "2":
+                sandwich.removeFreeToppings(getToppings("regular toppings to remove:", sandwich.getFreeToppings().toArray(new String[0])));
+                break;
+            case "3":
+                sandwich.removeFreeSauces(getToppings("sauces to remove:", sandwich.getFreeSauces().toArray(new String[0])));
+                break;
+            case "4": return;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
     }
 
     // **************************** ADD SANDWICH ORDER SCREEN ****************************
@@ -82,14 +240,14 @@ public class DisplayMenu {
         String breadSize = getSingleItem("sandwich size:", UtilMethods.passArray("bread size"));
         double breadSizePrice = getBreadPrice(breadSize);
         // create sandwich object
-        Sandwich sandwich = new Sandwich(breadSize, breadSizePrice, breadChoice, getToastedOption());
+        Sandwich sandwich = new Sandwich(breadSize, breadSizePrice, breadChoice, getToastedOption(), 0);
         // get all toppings & set them in the object
         sandwich.setMeats(getToppings("meat toppings:", UtilMethods.passArray("meat")));
         sandwich.setCheeses(getToppings("cheese toppings:", UtilMethods.passArray("cheese")));
         sandwich.setFreeToppings(getToppings("Regular toppings:", UtilMethods.passArray("free toppings")));
         sandwich.setFreeSauces(getToppings("sauces:", UtilMethods.passArray("sauces")));
         // ask for au jus sauce
-        promptASauce();
+        promptASauce(sandwich);
         allSandwiches.add(sandwich);
     }
 
@@ -143,7 +301,13 @@ public class DisplayMenu {
                 if (choice >= 0 && choice < options.length) {
                     // return string of selected choice
                     selectedToppings.add(options[choice]);
-                    System.out.println("\n**** Added " + options[choice] + " to toppings. ****");
+
+                    if(promptMessage.contains("remove")){
+                        System.out.println("\n**** Item " + options[choice] + " removed from toppings. ****");
+                    } else {
+                        System.out.println("\n**** Added " + options[choice] + " to toppings. ****");
+                    }
+
                     // Ask the user if they want to add more toppings
                     System.out.printf("\nWould you like to add more %s? (y) yes or (n) no ", promptMessage);
                     System.out.print("\n|| Selection: ");
@@ -195,13 +359,13 @@ public class DisplayMenu {
 
 // **************************** A SAUCE ORDER SCREEN ****************************
 
-    public static void promptASauce() {
+    public static void promptASauce(Sandwich sandwich) {
         while (true){
             System.out.println("Would you like au jus sauce? y(yes) or n(no)");
             System.out.print("Selection: ");
             String choice = scan.nextLine().trim();
             switch (choice) {
-                case "y": ++aSauce;
+                case "y": sandwich.setaSauce(1);
                     System.out.println("\n ~~~~ You have selected au jus sauce to be added ~~~~");
                     return;
                 case "n": System.out.println("\n ~~~~ You have selected no au jus sauce ~~~~");
@@ -262,10 +426,10 @@ public class DisplayMenu {
                 item.getFreeToppings().forEach(regTopping -> System.out.println("  - " + regTopping));
                 System.out.println("| Sauces :");
                 item.getFreeSauces().forEach(sauce -> System.out.println("  - " + sauce));
-                if(aSauce > 0 ){
-                    System.out.printf("| Au Jus sauce : x %d", aSauce);
+                if(item.getaSauce() > 0 ){
+                    System.out.printf("| Au Jus sauce : x %d", item.getaSauce());
                 }
-                total = item.getTotal();
+                total += item.getTotal();
             }
 
             // if there are chips print them
@@ -311,6 +475,7 @@ public class DisplayMenu {
             }
         }
     }
+
 
     public static void exitProgram() {
         DisplayMessage.exitProgram();
