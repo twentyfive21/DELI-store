@@ -10,16 +10,26 @@ public class Sandwich extends OrderItem{
     private List<String> freeToppings;
     private List<String> freeSauces;
     private boolean toasted;
+    private int aSauce;
 
     // constructor
 
-    public Sandwich(String size, double price, String type, boolean toasted) {
+    public Sandwich(String size, double price, String type, boolean toasted, int aSauce) {
         super(size, price, type);
         this.meats = new ArrayList<>();
         this.cheeses = new ArrayList<>();
         this.freeToppings = new ArrayList<>();
         this.freeSauces = new ArrayList<>();
         this.toasted = toasted;
+        this.aSauce = aSauce;
+    }
+
+    public int getaSauce() {
+        return aSauce;
+    }
+
+    public void setaSauce(int aSauce) {
+        this.aSauce = aSauce;
     }
 
     public boolean isToasted() {
@@ -109,13 +119,55 @@ public class Sandwich extends OrderItem{
         }
 
         return total;
-    };
+    }
 
+    public void addMeats(List<String> itemsToAdd) {
+        addToItemList(itemsToAdd, meats);
+    }
+
+    public void addCheeses(List<String> itemsToAdd) {
+        addToItemList(itemsToAdd, cheeses);
+    }
+
+    public void addFreeToppings(List<String> itemsToAdd) {
+        addToItemList(itemsToAdd, freeToppings);
+    }
+
+    public void addFreeSauces(List<String> itemsToAdd) {
+        addToItemList(itemsToAdd, freeSauces);
+    }
+
+    public void removeMeats(List<String> itemsToRemove) {
+        removeFromItemList(itemsToRemove, meats);
+    }
+
+    public void removeCheeses(List<String> itemsToRemove) {
+        removeFromItemList(itemsToRemove, cheeses);
+    }
+
+    public void removeFreeToppings(List<String> itemsToRemove) {
+        removeFromItemList(itemsToRemove, freeToppings);
+    }
+
+    public void removeFreeSauces(List<String> itemsToRemove) {
+        removeFromItemList(itemsToRemove, freeSauces);
+    }
+
+    private void addToItemList(List<String> itemsToAdd, List<String> itemList) {
+        for (String item : itemsToAdd) {
+            itemList.add(item);
+        }
+    }
+
+    private void removeFromItemList(List<String> itemsToRemove, List<String> itemList) {
+        // remove all to remove any matches while if you did remove it would remove it just once
+        itemList.removeAll(itemsToRemove);
+    }
 
     @Override
     public String toString() {
-        return "\nSandwich size= " + size +
-                "\nPrice= " + price +
+        return "Sandwich size= " + size +
+                "\nPrice= " + String.format("$%,.2f", price)+
                 "\nType= " + type  +
                 "\nFreeSauces = " + freeSauces +
                 "\nFree Toppings= " + freeToppings +
