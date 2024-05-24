@@ -1,5 +1,6 @@
 package com.pluralsight.menuItems;
 /*
+
 - Protected members can be accessed by any subclass,
     whether they are in the same package or not.
 - Private members, on the other hand, are accessible only within

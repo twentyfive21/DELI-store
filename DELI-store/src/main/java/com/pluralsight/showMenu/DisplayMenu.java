@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DisplayMenu {
+
     // global scanner
     static Scanner scan = new Scanner(System.in);
     // keep count of sauce if user adds to order
@@ -38,6 +39,8 @@ public class DisplayMenu {
         }
 
     }
+
+    // **************************** LOAD SIGNATURE SANDWICHES  ************************************
 
     public static void loadSignatureSandwiches(){
         List<String> bltMeats = new ArrayList<>(List.of("Bacon"));
@@ -89,11 +92,14 @@ public class DisplayMenu {
         }
     }
 
+    // **************************** CANCEL ORDER AND CLEAR ARRAYS ************************************
+
     public static void cancelOrder(){
         allSandwiches.clear();
         allChips.clear();
         allDrinks.clear();
     }
+
     // **************************** ADD SIGNATURE SANDWICH ORDER SCREEN ****************************
 
     public static void addSignatureSandwich(){
@@ -115,28 +121,42 @@ public class DisplayMenu {
     }
 
     // **************************** MODIFY SIGNATURE SANDWICH ORDER SCREEN ****************************
+
     public static void modifySignatureSandwich(Sandwich sandwich) {
         while (true) {
             DisplayMessage.displaySandwichesHeadline();
+
+            // display what the current sandwich contains
+
             String toasted = sandwich.isToasted() ? "is toasted" : "not toasted";
             System.out.printf("Bread type: %s and %s\n", sandwich.getType(), toasted);
             System.out.printf("Bread size: %s' \n", sandwich.getSize());
+
+            // display meats
             System.out.println("Meat Toppings: ");
             for (String meatTopping : sandwich.getMeats()){
                 System.out.println("  - " + meatTopping);
             }
+
+            // display cheeses
             System.out.println("Cheese Toppings: ");
             for (String cheeseTopping : sandwich.getCheeses()){
                 System.out.println("  - " + cheeseTopping);
             }
+
+            // display regular toppings
             System.out.println("Regular Toppings: ");
             for (String freeTopping : sandwich.getFreeToppings()){
                 System.out.println("  - " + freeTopping);
             }
+
+            // display the sauces
             System.out.println("Sauces: ");
             for (String sauces : sandwich.getFreeSauces()){
                 System.out.println("  - " + sauces);
             }
+
+            // set which signature sandwich was chosen
             Sandwich modifiedsandwich;
             if(signatureChoice.equals("blt")){
                 modifiedsandwich = bltSandwich;
@@ -144,6 +164,8 @@ public class DisplayMenu {
                 modifiedsandwich = phillySandwich;
             }
             DisplayMessage.displaySignatureModifyChoice();
+
+            // get users choice for signature
             String choice = scan.nextLine().trim();
             switch (choice) {
                 case "1": // Confirm order without changes
@@ -169,12 +191,16 @@ public class DisplayMenu {
         }
     }
 
+    // ****************************    MODIFY BREAD TYPE     ****************************
+
     public static void changeBreadType(Sandwich sandwich) {
         String newBreadType = getSingleItem("bread:", UtilMethods.passArray("bread type"));
         sandwich.setType(newBreadType);
         System.out.println("Bread type changed to " + newBreadType);
 
     }
+
+    // ****************************    ADD TOPPINGS FOR SIGNATURE SANDWICH     ****************************
 
     public static void addToppings(Sandwich sandwich) {
         System.out.println("What type of toppings would you like to add? or select 4 to exit");
@@ -183,6 +209,7 @@ public class DisplayMenu {
         String choice = scan.nextLine().trim();
         switch (choice) {
             case "0":
+                // .add(type) is a method in the class to add item to arraylist
                 sandwich.addMeats(getToppings("meat toppings:", UtilMethods.passArray("meat")));
                 break;
             case "1":
@@ -200,6 +227,8 @@ public class DisplayMenu {
                 break;
         }
     }
+
+    // ****************************     DELETE TOPPINGS FOR SIGNATURE SANDWICH    ****************************
 
     public static void deleteToppings(Sandwich sandwich) {
     //  .toArray(new String[0]): This part converts the list of meat toppings to an array of strings.
@@ -288,9 +317,10 @@ public class DisplayMenu {
 // **************************** UTILITY TOPPING ORDER SCREEN ****************************
 
     public static List<String> getToppings(String promptMessage, String[] options) {
+        // init arraylist
         List<String> selectedToppings = new ArrayList<>();
         boolean moreToppings = true;
-
+        // keep adding toppings till false
         while (moreToppings) {
             System.out.println();
             UtilMethods.printOutMenu(promptMessage, options);
@@ -387,6 +417,7 @@ public class DisplayMenu {
         double drinkPrice;
         String chosenDrink = getSingleItem(menuItem, UtilMethods.passArray(menuItem));
         String drinkSize = getSingleItem(menuSize, UtilMethods.passArray(menuSize));
+        // set drink price
         if(drinkSize.equals("Small")){
             drinkPrice = 2.00;
         } else if (drinkSize.equals("Medium")){
@@ -394,6 +425,7 @@ public class DisplayMenu {
         }else {
             drinkPrice = 3.00;
         }
+        // create drink object and add to arraylist
         Drinks drink = new Drinks(drinkSize, drinkPrice, chosenDrink);
         allDrinks.add(drink);
     }
@@ -403,6 +435,7 @@ public class DisplayMenu {
     public static void addChips() {
         String menuItem = "chips";
         String chosenChips = getSingleItem(menuItem, UtilMethods.passArray(menuItem));
+        // create chip object and add to arraylist
         Chips chip = new Chips("r", 1.50, chosenChips);
         allChips.add(chip);
     }
@@ -411,14 +444,20 @@ public class DisplayMenu {
 
     public static void displayCheckout() {
         while (true) {
+            // initialize total
             double total = 0.00;
             DisplayMessage.displayCartHeadline();
 
+            // if there are sandwiches display each one
             for (Sandwich item : allSandwiches) {
+
+                // show headline and get bread data
                 DisplayMessage.displaySandwichesHeadline();
                 String isToasted = item.isToasted() ? "toasted" : "not toasted";
                 System.out.printf("| Bread type: %s %s' & is %s", item.getType(), item.getSize(), isToasted);
                 System.out.printf("\n| Bread price: $%.2f", item.getPrice());
+
+                // dispaly all toppings
                 System.out.println("\n| Meat Toppings :");
                 item.getMeats().forEach(meat -> System.out.println("  - " + meat));
                 System.out.println("| Cheese Toppings :");
@@ -427,9 +466,13 @@ public class DisplayMenu {
                 item.getFreeToppings().forEach(regTopping -> System.out.println("  - " + regTopping));
                 System.out.println("| Sauces :");
                 item.getFreeSauces().forEach(sauce -> System.out.println("  - " + sauce));
+
+                /// if au jus sauce added display it
                 if(item.getaSauce() > 0 ){
                     System.out.printf("| Au Jus sauce : x %d", item.getaSauce());
                 }
+
+                // calculate total of all ingredients
                 total += item.getTotal();
             }
 
@@ -454,21 +497,25 @@ public class DisplayMenu {
             // display cart checkout options or say there are no items
             if (allDrinks.isEmpty() && allChips.isEmpty() && allSandwiches.isEmpty()) {
                 DisplayMessage.noItemsInCart();
+
+                // !!! if cart is empty return to menu after displaying no items !!!
                 return;
+
             } else {
                 System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.printf("|  💰 Order Total: $%.2f\n", total);
                 DisplayMessage.displayCheckout();
             }
+
+            // ask user if they want to purchase the item or delete it
             String choice = scan.nextLine();
             switch (choice){
-                case "0" : cancelOrder();
+                case "0" : cancelOrder(); // clear out the order & go back home
                     System.out.println("\n~~~~~~~~~~~~~~~~~~~~ Order canceled ~~~~~~~~~~~~~~~~~~~~~");
                     return;
-                case "1": Receipt.saveOrderToFile(total,allSandwiches,allDrinks,allChips);
+                case "1": Receipt.saveOrderToFile(total,allSandwiches,allDrinks,allChips); // save to csv
                     System.out.println("\n 🥳 Thank you for your payment! Here is your order 🥳");
-                    // clear old order
-                    cancelOrder();
+                    cancelOrder();  // clear old order
                     return;
                 default: System.out.println("\n**** Error please pick 1 or 2 ****");
                     break;
@@ -477,8 +524,10 @@ public class DisplayMenu {
         }
     }
 
+    // ****************************** EXIT PROGRAM *****************************************
 
     public static void exitProgram() {
         DisplayMessage.exitProgram();
     }
+
 }

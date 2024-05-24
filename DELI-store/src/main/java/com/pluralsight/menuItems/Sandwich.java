@@ -76,8 +76,11 @@ public class Sandwich extends OrderItem{
     @Override
     // abstract method
     public double getTotal(){
+
+    // get sandwich price for just the bread
     double total = super.price;
 
+        // ************ calculate math for meats ************
         if(super.getSize().equals("4")){
 
             for(int i = 0; i < meats.size(); i++){
@@ -97,6 +100,8 @@ public class Sandwich extends OrderItem{
             }
 
         }
+
+        // ************ calculate math for cheeses ************
 
         if(super.getSize().equals("4")){
 
@@ -120,6 +125,8 @@ public class Sandwich extends OrderItem{
 
         return total;
     }
+
+    // *********** methods passing items to add or delete *****************
 
     public void addMeats(List<String> itemsToAdd) {
         addToItemList(itemsToAdd, meats);
@@ -152,6 +159,8 @@ public class Sandwich extends OrderItem{
     public void removeFreeSauces(List<String> itemsToRemove) {
         removeFromItemList(itemsToRemove, freeSauces);
     }
+
+    // ************ util methods to change array list ***************
 
     private void addToItemList(List<String> itemsToAdd, List<String> itemList) {
         for (String item : itemsToAdd) {

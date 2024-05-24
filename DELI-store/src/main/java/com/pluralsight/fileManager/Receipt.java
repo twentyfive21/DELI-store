@@ -25,6 +25,9 @@ public class Receipt {
            bufferedWriter.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
            bufferedWriter.write("|                        Receipt                         |\n");
            bufferedWriter.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
+           // ***********************  write sandwiches to file **************************
+
            if(allSandwiches.isEmpty()){
                bufferedWriter.write("| No sandwiches ordered \n");
            } else {
@@ -34,6 +37,9 @@ public class Receipt {
                }
            }
            bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
+           // ***********************  write chips to file **************************
+
           if (allChips.isEmpty()){
               bufferedWriter.write("| No chips ordered\n");
           } else {
@@ -42,6 +48,9 @@ public class Receipt {
               }
           }
            bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
+           // ***********************  drinks to file **************************
+
           if (allDrinks.isEmpty()){
               bufferedWriter.write("| No drinks ordered \n");
           }else {
@@ -49,6 +58,8 @@ public class Receipt {
                   bufferedWriter.write(String.valueOf(drink));
               }
           }
+
+           // ***********************  write total and close writer **************************
            bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
            bufferedWriter.write("Total Today: $" + String.format("%,.2f", total));
            bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
