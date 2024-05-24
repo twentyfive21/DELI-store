@@ -29,7 +29,8 @@ public class Receipt {
                bufferedWriter.write("| No sandwiches ordered \n");
            } else {
                for (Sandwich sandwich : allSandwiches){
-                   bufferedWriter.write(String.valueOf(sandwich) + "\n");
+                   bufferedWriter.write(String.valueOf(sandwich));
+                   bufferedWriter.newLine();
                }
            }
            bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");

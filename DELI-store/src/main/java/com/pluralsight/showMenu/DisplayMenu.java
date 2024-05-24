@@ -80,6 +80,7 @@ public class DisplayMenu {
                     break;
                 case "5": displayCheckout();
                     break;
+                case "6": return; // go back to main screen
                 case "0": cancelOrder();
                     return;
                 default: System.out.println("\n️️❗️️️❗️     Error please pick 0 - 4 ️️    ❗️️️❗️");
@@ -107,7 +108,7 @@ public class DisplayMenu {
                     signatureChoice = "philly";
                     break;
                 case "3": return;
-                default: System.out.println("Invalid signature choice please select 1-3");
+                default: System.out.println("\n**** Invalid signature choice please select 1-3 ****");
                     break;
             }
         }
@@ -162,7 +163,7 @@ public class DisplayMenu {
                 case "6": // Exit modification
                     return;
                 default:
-                    System.out.println("Invalid choice, please select 1-5");
+                    System.out.println("\n**** Invalid choice, please select 1-6 ****");
                     break;
             }
         }
