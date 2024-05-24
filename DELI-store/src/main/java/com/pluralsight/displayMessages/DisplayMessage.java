@@ -6,10 +6,11 @@ public class DisplayMessage {
 
     public static void displayStartOfProgram(){
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("|               🥪 Welcome to Subway! 🥪                |");
+        System.out.println("|            🧀🥬🥪 Welcome to Subway! 🥪🥓🍅           |");
+        System.out.println("|           Thank you, for choosing our location!         |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("|  (1) 🥗 Place a New Order                              |");
-        System.out.println("|  (2) ❌ Exit                                           |");
+        System.out.println("|  (1) Place a New Order 🍞                              |");
+        System.out.println("|  (2) Exit 👋🏼                                           |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.print("|| Please make a selection: ");
     }
@@ -18,10 +19,11 @@ public class DisplayMessage {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("|      🛍️ You have selected to start a new order! 🛍️     |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("|  (1) Add a Sandwich 🥖                                 |");
-        System.out.println("|  (2) Add a Drink 🥤                                    |");
-        System.out.println("|  (3) Add a Chips 🥔                                    |");
-        System.out.println("|  (4) Checkout 🛍️                                       |");
+        System.out.println("|  (1) Add a custom sandwich 🥖                          |");
+        System.out.println("|  (2) Add a signature sandwich 🥖                       |");
+        System.out.println("|  (3) Add a Drink 🥤                                    |");
+        System.out.println("|  (4) Add a Chips 🥔                                    |");
+        System.out.println("|  (5) Checkout 🛍️                                       |");
         System.out.println("|  (0) Cancel Order ❌                                   |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.print("|| Please make a selection: ");
@@ -97,6 +99,32 @@ public class DisplayMessage {
         System.out.println("|                🥪 Sandwich Details  🥪               |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
+
+    public static void displaySignatureOptions(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|      🥓 You have selected signature sandwiches 🧀      |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|  (1) BLT Sandwich 💧                                   |");
+        System.out.println("|  (2) Philly Cheese Steak 🧀                            |");
+        System.out.println("|  (3) Go back to order screen 🖥️                        |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.print("|| Please make a selection: ");
+    }
+
+    public static void displaySignatureModifyChoice(){
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("|       🌭 What else would you like to do today?  🍞     |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("| (1) Add sandwich to order 🍽                            |");
+        System.out.println("| (2) Change Bread Type 🍞                                |");
+        System.out.println("| (3) Add Toppings 🍅                                     |");
+        System.out.println("| (4) Remove Toppings 🍴                                  |");
+        System.out.println("| (5) Add your modified signature sandwich 🫕             |");
+        System.out.println("| (6) Go back ↩️                                          |");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.print("|| Please make a selection: ");
+    }
+
 
 
 }
