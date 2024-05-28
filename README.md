@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/twentyfive21/DELI-store/assets/107441301/a6b7a1b1-f5fb-4aaf-a2bc-ed70f1f1a609)" height="250">
+  <img src="https://github.com/twentyfive21/DELI-store/assets/107441301/a6b7a1b1-f5fb-4aaf-a2bc-ed70f1f1a609" height="250">
 </p>
 
 <h1 align="center">Deli Store Java Application Capstone 2</h1> 
