@@ -21,6 +21,6 @@ public class Drinks extends OrderItem {
 
     @Override
     public String toString() {
-        return "Drink Details: "+ type + String.format(" $%,.2f", price) + "\n";
+        return type + String.format(" $%,.2f", price) + "\n";
     }
 }

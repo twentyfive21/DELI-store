@@ -85,8 +85,9 @@ public class DisplayMenu {
                     break;
                 case "6": return; // go back to main screen
                 case "0": cancelOrder();
+                    System.out.println("\n~~~~~~~~~~~~~~~~~ ❌  Order canceled  ❌ ~~~~~~~~~~~~~~~~~");
                     return;
-                default: System.out.println("\n️️❗️️️❗️     Error please pick 0 - 4 ️️    ❗️️️❗️");
+                default: System.out.println("\n️️❗️️️❗️     Error please pick 0 - 6 ️️    ❗️️️❗️");
                     break;
             }
         }
@@ -169,6 +170,7 @@ public class DisplayMenu {
             String choice = scan.nextLine().trim();
             switch (choice) {
                 case "1": // Confirm order without changes
+                    System.out.println("\n~~~~~~~~~~~~ 🥪 Sandwich added to order ! 🥪 ~~~~~~~~~~~~");
                     allSandwiches.add(sandwich);
                     return;
                 case "2": // Change bread type
@@ -180,7 +182,8 @@ public class DisplayMenu {
                 case "4": // Delete toppings
                     deleteToppings(sandwich);
                     break;
-                case "5": allSandwiches.add(modifiedsandwich);
+                case "5": System.out.println("\n~~~~~~~~~~~~ 🥪 Sandwich added to order ! 🥪 ~~~~~~~~~~~~");
+                    allSandwiches.add(modifiedsandwich);
                     return;
                 case "6": // Exit modification
                     return;
@@ -223,7 +226,7 @@ public class DisplayMenu {
                 break;
             case "4": return;
             default:
-                System.out.println("Invalid choice");
+                System.out.println("\n~~~~~~~~~~~~~ ! Invalid choice !~~~~~~~~~~~~~ ");
                 break;
         }
     }
@@ -254,7 +257,7 @@ public class DisplayMenu {
                 break;
             case "4": return;
             default:
-                System.out.println("Invalid choice");
+                System.out.println("\n~~~~~~~~~~~~~ ! Invalid choice !~~~~~~~~~~~~~ ");
                 break;
         }
     }
@@ -392,7 +395,7 @@ public class DisplayMenu {
 
     public static void promptASauce(Sandwich sandwich) {
         while (true){
-            System.out.println("Would you like au jus sauce? y(yes) or n(no)");
+            System.out.println("Would you like au jus sauce? yes(y) or no(n)");
             System.out.print("Selection: ");
             String choice = scan.nextLine().trim();
             switch (choice) {
@@ -428,6 +431,7 @@ public class DisplayMenu {
         // create drink object and add to arraylist
         Drinks drink = new Drinks(drinkSize, drinkPrice, chosenDrink);
         allDrinks.add(drink);
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~🧋 Drink added 🫗~~~~~~~~~~~~~~~~~~~~~");
     }
 
     // **************************** ADD CHIPS ORDER SCREEN ****************************
@@ -438,6 +442,7 @@ public class DisplayMenu {
         // create chip object and add to arraylist
         Chips chip = new Chips("r", 1.50, chosenChips);
         allChips.add(chip);
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~🥔 Chip added 🥔~~~~~~~~~~~~~~~~~~~~~");
     }
 
     // **************************** DISPLAY CHECKOUT SCREEN ****************************
@@ -511,7 +516,7 @@ public class DisplayMenu {
             String choice = scan.nextLine();
             switch (choice){
                 case "0" : cancelOrder(); // clear out the order & go back home
-                    System.out.println("\n~~~~~~~~~~~~~~~~~~~~ Order canceled ~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println("\n~~~~~~~~~~~~~~~~~ ❌  Order canceled  ❌ ~~~~~~~~~~~~~~~~~");
                     return;
                 case "1": Receipt.saveOrderToFile(total,allSandwiches,allDrinks,allChips); // save to csv
                     System.out.println("\n 🥳 Thank you for your payment! Here is your order 🥳");

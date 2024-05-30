@@ -30,35 +30,49 @@ public class Receipt {
 
            if(allSandwiches.isEmpty()){
                bufferedWriter.write("| No sandwiches ordered \n");
+               bufferedWriter.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
            } else {
+               bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+               bufferedWriter.write("|                 🥪 Sandwich Details  🥪               |\n");
+               bufferedWriter.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                for (Sandwich sandwich : allSandwiches){
                    bufferedWriter.write(String.valueOf(sandwich));
+                   if(allSandwiches.size() > 1){
+                       bufferedWriter.write("\n---------------------------------------------------");
+                   }
                    bufferedWriter.newLine();
                }
            }
-           bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-
+           bufferedWriter.write("*********************************************************\n");
            // ***********************  write chips to file **************************
 
           if (allChips.isEmpty()){
               bufferedWriter.write("| No chips ordered\n");
+              bufferedWriter.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
           } else {
+              bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+              bufferedWriter.write("|                     🥔  Chips  🥔                     |\n");
+              bufferedWriter.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
               for (Chips chip: allChips){
                   bufferedWriter.write(String.valueOf(chip));
               }
           }
-           bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+           bufferedWriter.write("*********************************************************\n");
 
            // ***********************  drinks to file **************************
 
           if (allDrinks.isEmpty()){
               bufferedWriter.write("| No drinks ordered \n");
+              bufferedWriter.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
           }else {
+              bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+              bufferedWriter.write("|                      🥤 Drinks 🧋                     |\n");
+              bufferedWriter.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
               for (Drinks drink : allDrinks){
                   bufferedWriter.write(String.valueOf(drink));
               }
           }
-
+           bufferedWriter.write("*********************************************************\n");
            // ***********************  write total and close writer **************************
            bufferedWriter.write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
            bufferedWriter.write("Total Today: $" + String.format("%,.2f", total));

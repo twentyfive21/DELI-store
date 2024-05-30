@@ -14,6 +14,6 @@ public class Chips extends OrderItem{
 
     @Override
     public String toString() {
-        return "Chips Details: "+ type + String.format(" $%,.2f", price) + "\n";
+        return type + String.format(" $%,.2f", price) + "\n";
     }
 }

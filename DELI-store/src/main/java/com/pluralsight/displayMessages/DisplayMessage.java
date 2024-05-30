@@ -2,21 +2,20 @@ package com.pluralsight.displayMessages;
 
 public class DisplayMessage {
 
-    // ********************************* EXIT PROGRAM ************************************
 
     public static void displayStartOfProgram(){
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("|            🧀🥬🥪 Welcome to Subway! 🥪🥓🍅           |");
         System.out.println("|           Thank you, for choosing our location!         |");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("|  (1) Place a New Order 🍞                              |");
         System.out.println("|  (2) Exit 👋🏼                                           |");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.print("|| Please make a selection: ");
     }
 
     public static void mainOrderScreen(){
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("|      🛍️ You have selected to start a new order! 🛍️     |");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("|  (1) Add a custom sandwich 🥖                          |");
@@ -26,7 +25,7 @@ public class DisplayMessage {
         System.out.println("|  (5) Checkout 🛍️                                       |");
         System.out.println("|  (6) Go back ↩️                                        |");
         System.out.println("|  (0) Cancel Order ❌                                   |");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.print("|| Please make a selection: ");
     }
 
